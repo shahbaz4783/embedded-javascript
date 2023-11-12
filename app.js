@@ -11,17 +11,18 @@ let task = 'work hard';
 const isWeekend = (day === 0) | (day === 6);
 dayType = isWeekend && 'weekend';
 task = isWeekend && 'chill';
-let totalLetters;
+let totalLettersMid;
 
 app.use(express.urlencoded({ extended: false }));
 
-// const countLetters = (req, res, next) => {
-//     console.log(req.body);
-// 	totalLetters = (req.body['fname'] + req.body['lname']).length;
-//     next();
-// };
-
-// app.use(countLetters)
+// Custom Middleware for counting letters
+const countLetters = (req, res, next) => {
+    console.log(req.body);
+	totalLettersMid = (req.body['fname'] + req.body['lname']).length;
+    console.log(totalLettersMid);
+    next();
+};
+app.use(countLetters)
 
 // First Challenge
 app.get('/', (req, res) => {
